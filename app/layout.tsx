@@ -1,12 +1,12 @@
 import '@globals'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Manrope } from 'next/font/google'
 // @meta
 import { metadata } from '@config'
 // @components
 import { Navbar } from '@components/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
-const spaceGrotesk = Space_Grotesk({
+const manrope = Manrope({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
 })
