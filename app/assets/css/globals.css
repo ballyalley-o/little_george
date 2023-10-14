@@ -118,6 +118,9 @@
   .nav-brand {
     @apply font-manrope text-[21px] text-secondary font-bold;
   }
+  .nav-brand-2 {
+    @apply font-manrope text-[21px] text-primary font-bold;
+  }
 
   /* PRICE INFO */
   .price-info_card {
