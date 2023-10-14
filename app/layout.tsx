@@ -5,7 +5,7 @@ import { Inter, Manrope } from 'next/font/google'
 import { Navbar } from '@components'
 import { ToastContainer } from 'react-toastify'
 // @config
-import { SETTING, TOAST_POSITION } from '@config'
+import { SETTING, LANG, TOAST_POSITION } from '@config'
 
 const inter = Inter({ subsets: ['latin'] })
 const manrope = Manrope({
@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <html lang='en'>
+      <html lang={LANG.en}>
         <body className={inter.className}>
           <main className='max-w-10xl mx-auto'>
             <Navbar />
