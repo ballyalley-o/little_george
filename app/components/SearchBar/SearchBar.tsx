@@ -6,6 +6,7 @@ import { Spinner } from '@components'
 // @constants
 import { TITLE } from '@constants'
 // @assets
+import { scrapeAndStoreProduct } from '@lib/actions'
 import { toast } from 'react-toastify'
 // @utils
 import { isAmazonProductValid } from '@utils'
@@ -14,7 +15,7 @@ const SearchBar = () => {
   const [searchPrompt, setSearchPrompt] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const isLinkValid = isAmazonProductValid(searchPrompt)
@@ -23,6 +24,8 @@ const SearchBar = () => {
 
     try {
       setIsLoading(true)
+      const prod = await scrapeAndStoreProduct(searchPrompt)
+      toast.success('Successful Scrape')
     } catch (error: any) {
       toast.error(error.message)
     } finally {
