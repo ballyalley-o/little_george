@@ -2,8 +2,8 @@ import React from 'react'
 // @components
 import Image from 'next/image'
 import Link from 'next/link'
-// @assets
-import { ASSETS } from '@config'
+// @globals & @assets
+import { ASSET, GLOBAL } from '@config'
 
 const Navbar = () => {
   return (
@@ -11,9 +11,20 @@ const Navbar = () => {
       <nav className='nav'>
         <Link href='/' className='flex items-center gap-1'>
           <p className='nav-brand'>little</p>
-          <Image {...ASSETS.logo} />
-          <p className='nav-brand'>george</p>
+          <Image {...ASSET.logo} />
+          <p className='nav-brand-2'>george</p>
         </Link>
+        <div className='flex items-center gap-5'>
+          {ASSET.nav.map((icon) => (
+            <Image
+              key={icon.alt}
+              src={icon.src}
+              alt={icon.alt}
+              {...GLOBAL.nav_icon_size}
+              className='object-contain'
+            />
+          ))}
+        </div>
       </nav>
     </header>
   )
