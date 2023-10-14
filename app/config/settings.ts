@@ -2,7 +2,7 @@ import { TOAST_POSITION } from '@config'
 
 const SETTING = {
   toast: {
-    // position: top-center,
+    // position: TOAST_POSITION,
     autoClose: 2000,
     hideProgressBar: true,
     newestOnTop: true,
