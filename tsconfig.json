@@ -22,8 +22,7 @@
     "paths": {
       "@*": ["./*"],
       "@styles": ["./assets/*"],
-      "@globals": ["./assets/css/globals.css"],
-      "@carousel": ["react-responsive-carousel/lib/styles/carousel.min.css"]
+      "@globals": ["./assets/css/globals.css"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

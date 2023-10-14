@@ -9,17 +9,20 @@ import { ASSET, SETTING } from '@config'
 
 const HeroCarousel = () => {
   return (
-    <Carousel {...SETTING.carousel_home}>
-      {ASSET.mock_products.map((image, index) => (
-        <Image
-          key={index}
-          src={image.imgUrl}
-          alt={image.alt}
-          className='object-contain'
-          {...ASSET.sizes.images}
-        />
-      ))}
-    </Carousel>
+    <div className='hero-carousel'>
+      <Carousel {...SETTING.carousel_home}>
+        {ASSET.mock_products.map((image, index) => (
+          <Image
+            key={index}
+            src={image.imgUrl}
+            alt={image.alt}
+            className='object-contain'
+            {...ASSET.sizes.images}
+          />
+        ))}
+      </Carousel>
+      <Image {...ASSET.arrow_sketch} />
+    </div>
   )
 }
 
