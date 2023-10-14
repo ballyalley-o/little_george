@@ -1,4 +1,6 @@
 import { toast } from 'react-toastify'
+// @utils
+import { logger } from '@utils'
 
 const isAmazonProductValid = (url: string) => {
   try {
@@ -10,7 +12,7 @@ const isAmazonProductValid = (url: string) => {
       hostname.includes('amazon.') ||
       hostname.includes('amazon')
     ) {
-      toast.success(`${url} VALID`)
+      logger.log('VALID LINK')
       return true
     }
   } catch (err: any) {
