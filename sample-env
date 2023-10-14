@@ -1,0 +1,5 @@
+BRIGHT_DATA_USER=brd-customer-hl_81614b81-zone-little_george
+BRIGHT_DATA_PASS=pmsqnn4u0o7w
+BASE_CURL=curl --proxy brd.superproxy.io:22225 --proxy-user brd-customer-hl_81614b81-zone-little_george:pmsqnn4u0o7w -k https://lumtest.com/myip.json
+BRIGHT_DATA_PORT=22225
+BRIGHT_DATA_HOST=brd.superproxy.io:
