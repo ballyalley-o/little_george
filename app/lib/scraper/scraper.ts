@@ -7,6 +7,7 @@ import {
   extractPrice,
   extractCurrency,
   extractDiscountRate,
+  extractDescription,
 } from '@utils'
 
 async function scrapeProduct(url: string) {
@@ -57,9 +58,7 @@ async function scrapeProduct(url: string) {
     const imgUrls = Object.keys(JSON.parse(images))
     const currency = extractCurrency($('.a-price-symbol'))
     const discountRate = extractDiscountRate($('.savingsPercentage'))
-
-    const brand = $('span.a-size-base').text().trim()
-    const averageReview = $('#averageCustomerReviews').text().trim()
+    const description = extractDescription($)
 
     // build or reconstruct scraped data response
     const data = {
@@ -67,19 +66,23 @@ async function scrapeProduct(url: string) {
       currency: currency || '$',
       image: imgUrls[0],
       title,
-      currentPrice: Number(currentPrice),
-      originalPrice: Number(originalPrice),
+      currentPrice: Number(currentPrice) || Number(originalPrice),
+      originalPrice: Number(originalPrice) || Number(currentPrice),
       priceHistory: [],
       discountRate: Number(discountRate),
       category: 'category',
       reviewsCount: 100,
       stars: 4.5,
       isOutofStock: outOfStock,
+      description,
+      lowestPrice: Number(currentPrice) || Number(originalPrice),
+      highestPrice: Number(originalPrice) || Number(currentPrice),
+      average: Number(currentPrice) || Number(originalPrice),
     }
 
-    console.log(data)
+    return data
   } catch (error: any) {
-    throw new Error(`Failed to scraped product: ${error?.message}`)
+    throw new Error(`Failed to scraped product: ${error}`)
   }
 }
 
