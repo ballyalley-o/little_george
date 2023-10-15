@@ -46,7 +46,7 @@ async function scrapeProduct(url: string) {
     )
 
     const outOfStock =
-      $('#availability soan').text().trim().toLowerCase() ===
+      $('#availability span').text().trim().toLowerCase() ===
       'currently unavailable'
 
     const images =
@@ -55,19 +55,29 @@ async function scrapeProduct(url: string) {
       '{}'
 
     const imgUrls = Object.keys(JSON.parse(images))
-
     const currency = extractCurrency($('.a-price-symbol'))
     const discountRate = extractDiscountRate($('.savingsPercentage'))
 
-    console.log({
+    const brand = $('span.a-size-base').text().trim()
+    const averageReview = $('#averageCustomerReviews').text().trim()
+
+    // build or reconstruct scraped data response
+    const data = {
+      url,
+      currency: currency || '$',
+      image: imgUrls[0],
       title,
-      currentPrice: currentPrice[0],
-      originalPrice: originalPrice[0],
-      outOfStock,
-      imgUrls,
-      currency,
-      discountRate,
-    })
+      currentPrice: Number(currentPrice),
+      originalPrice: Number(originalPrice),
+      priceHistory: [],
+      discountRate: Number(discountRate),
+      category: 'category',
+      reviewsCount: 100,
+      stars: 4.5,
+      isOutofStock: outOfStock,
+    }
+
+    console.log(data)
   } catch (error: any) {
     throw new Error(`Failed to scraped product: ${error?.message}`)
   }
