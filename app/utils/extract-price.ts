@@ -8,7 +8,13 @@ function extractPrice(...elements: any) {
       const prices = priceText.replace(/[^0-9.]/g, '')
       const pricesArr = prices.split(/(?<=\d\.\d{2})/)
 
-      return pricesArr
+      let initialPrice
+
+      if (prices) {
+        initialPrice = prices.match(/\d+\.\d{2}/)?.[0]
+      }
+
+      return initialPrice || prices
     }
   }
   return ''
