@@ -2,7 +2,12 @@ import { GLOBAL } from '@config'
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 // @utils
-import { logger } from '@utils'
+import {
+  logger,
+  extractPrice,
+  extractCurrency,
+  extractDiscountRate,
+} from '@utils'
 
 async function scrapeProduct(url: string) {
   if (!url) return
@@ -25,7 +30,44 @@ async function scrapeProduct(url: string) {
     const resp = await axios.get(url, options)
     const $ = cheerio.load(resp.data)
     const title = $('#productTitle').text().trim()
-    console.log({ title })
+    const currentPrice = extractPrice(
+      $('.priceToPay span.a-price-whole'),
+      $('a.size.base.a-color-price'),
+      $('.a-button-selected .a-color-base'),
+      $('.a-price.a-text-price')
+    )
+
+    const originalPrice = extractPrice(
+      $('#priceblock_ourprice'),
+      $('.a-price.a-text-price span.a-offscreen'),
+      $('#listPrice'),
+      $('#priceblock_dealprice'),
+      $('.a-size-base.a-color-price')
+    )
+
+    const outOfStock =
+      $('#availability soan').text().trim().toLowerCase() ===
+      'currently unavailable'
+
+    const images =
+      $('#imgBlkFront').attr('data-a-dynamic-image') ||
+      $('#landingImage').attr('data-a-dynamic-image') ||
+      '{}'
+
+    const imgUrls = Object.keys(JSON.parse(images))
+
+    const currency = extractCurrency($('.a-price-symbol'))
+    const discountRate = extractDiscountRate($('.savingsPercentage'))
+
+    console.log({
+      title,
+      currentPrice: currentPrice[0],
+      originalPrice: originalPrice[0],
+      outOfStock,
+      imgUrls,
+      currency,
+      discountRate,
+    })
   } catch (error: any) {
     throw new Error(`Failed to scraped product: ${error?.message}`)
   }
