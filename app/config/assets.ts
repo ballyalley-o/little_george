@@ -4,6 +4,10 @@ const ASSET = {
       width: 20,
       height: 20,
     },
+    price_info: {
+      width: 24,
+      height: 24,
+    },
     navIcon: {
       width: 28,
       height: 28,
@@ -39,6 +43,12 @@ const ASSET = {
     height: 20,
     width: 20,
   },
+  star_icon: {
+    src: '/assets/icons/star.svg',
+    alt: 'star',
+    height: 16,
+    width: 16,
+  },
   logo: {
     src: '/assets/brand/little-george.svg',
     width: 27,
@@ -48,6 +58,12 @@ const ASSET = {
   arrow_r: {
     src: '/assets/icons/arrow-right.svg',
     alt: 'arrow-right',
+    width: 16,
+    height: 16,
+  },
+  comment_icon: {
+    src: '/assets/icons/comment.svg',
+    alt: 'comment',
     width: 16,
     height: 16,
   },
