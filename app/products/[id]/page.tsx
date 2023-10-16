@@ -1,6 +1,6 @@
 import React from 'react'
 // @components
-import { ProductDetails } from '@components/Product'
+import { PriceInfoCard, ProductDetails } from '@components/Product'
 // @types
 import Image from 'next/image'
 import Link from 'next/link'
@@ -11,6 +11,8 @@ import { redirect } from 'next/navigation'
 import { AiFillAmazonCircle } from 'react-icons/ai'
 // @globals
 import { ASSET } from '@config'
+// @utils
+import { formatNum } from '@utils'
 
 const page = async ({ params: { id } }: Params) => {
   const product: Product = await getProductById(id)
@@ -55,6 +57,64 @@ const page = async ({ params: { id } }: Params) => {
               <div className='p-2 bg-white-200 rounded-10'>
                 <Image {...ASSET.share_icon} />
               </div>
+            </div>
+          </div>
+          <div className='product-info'>
+            <div className='flex flex-col gap-2'>
+              <p className='text-[34] text-second font-bold'>
+                {product.currency}
+                {formatNum(product.currentPrice)}
+              </p>
+              <p className='text-[21] text-black opacity-50 line-through'>
+                {product.currency}
+                {formatNum(product.originalPrice)}
+              </p>
+            </div>
+            <div className='flex flex-col gap-4'>
+              <div className='flex gap-3'>
+                <div className='product-stars'>
+                  <Image {...ASSET.star_icon} />
+                  <p className='text-sm text-primary-orange font-semibold'>
+                    {product.stars || '25'}
+                  </p>
+                </div>
+                <div className='product-reviews'>
+                  <Image {...ASSET.comment_icon} />
+                  <p className='text-sm text-secondary font-semibold'>
+                    {product.reviewsCount} Reviews
+                  </p>
+                </div>
+              </div>
+              <p className='text-sm text-black opacity-50'>
+                <span className='text-primary-green font-semibold'>93%</span> of
+                Buyers have Recommended this
+              </p>
+            </div>
+          </div>
+          <div className='my-7 flex flex-col gap-5'>
+            <div className='flex gap-5 flex-wrap'>
+              <PriceInfoCard
+                title='Average Price'
+                icon='/assets/icons/chart.svg'
+                value={`${product.currency} ${formatNum(
+                  product.averagePrice
+                )} `}
+                borderColor='#B6DBFF'
+              />
+              <PriceInfoCard
+                title='Current Price'
+                icon='/assets/icons/arrow-up.svg'
+                value={`${product.currency} ${formatNum(
+                  product.highestPrice
+                )} `}
+                borderColor='#B6DBFF'
+              />
+              <PriceInfoCard
+                title='Average Price'
+                icon='/assets/icons/arrow-down.svg'
+                value={`${product.currency} ${formatNum(product.lowestPrice)} `}
+                borderColor='#BEFFC5'
+              />
             </div>
           </div>
         </div>
