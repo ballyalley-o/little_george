@@ -9,7 +9,11 @@ const productSchema = new mongoose.Schema(
     },
     currency: {
       type: String,
-      require: true,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
     },
     image: {
       type: String,
