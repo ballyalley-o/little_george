@@ -9,3 +9,4 @@ export { default as Spinner } from '@components/Spinner/Spinner'
 // @product
 export { default as ProductCard } from '@components/Product/ProductCard'
 export { default as ProductDetails } from '@components/Product/ProductDetails'
+export { default as PriceInfoCard } from '@components/Product/PriceInfoCard'
