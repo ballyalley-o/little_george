@@ -1,13 +1,16 @@
 import React from 'react'
 // @globals & @assets
 import { ASSET } from '@config'
+// @actions
+import { getProducts } from '@lib/actions/getters'
 // @components
 import Image from 'next/image'
-import { SearchBar, HeroCarousel } from '@components'
+import { SearchBar, HeroCarousel, ProductCard } from '@components'
 // @constants
 import { BRAND, TITLE } from '@constants'
 
-const Home = () => {
+const Home = async () => {
+  const products = await getProducts()
   return (
     <>
       <section className='px-6 md:px-20 py-24 '>
@@ -27,8 +30,8 @@ const Home = () => {
       <section className='trending-section'>
         <h2 className='section-text'>{TITLE.trending}</h2>
         <div className='flex flex-wrap gap-x-8 gap-y-16'>
-          {['apple', 'book', 'shoes', 'pussy'].map((product, index) => (
-            <div key={index}>{product}</div>
+          {products?.map((product, index) => (
+            <ProductCard key={index} product={product} />
           ))}
         </div>
       </section>
