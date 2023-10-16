@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export type PriceHistoryItem = {
   price: number
 }
@@ -41,4 +43,8 @@ export type EmailContent = {
 export type EmailProductInfo = {
   title: string
   url: string
+}
+
+export type Params = {
+  params: { id: string }
 }

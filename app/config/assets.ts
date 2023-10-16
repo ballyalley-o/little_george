@@ -1,13 +1,53 @@
 const ASSET = {
   sizes: {
+    _def_icon: {
+      width: 20,
+      height: 20,
+    },
+    price_info: {
+      width: 24,
+      height: 24,
+    },
     navIcon: {
       width: 28,
       height: 28,
+    },
+    product_image: {
+      width: 200,
+      height: 200,
+    },
+    product_detail: {
+      width: 580,
+      height: 400,
     },
     images: {
       width: 484,
       height: 484,
     },
+  },
+  heart_icon: {
+    src: '/assets/icons/red-heart.svg',
+    alt: 'heart',
+    width: 20,
+    height: 20,
+  },
+  bookmark_icon: {
+    src: '/assets/icons/bookmark.svg',
+    alt: 'bookmark',
+    height: 20,
+    width: 20,
+  },
+  share_icon: {
+    src: '/assets/icons/share.svg',
+    alt: 'share',
+    height: 20,
+    width: 20,
+  },
+  star_icon: {
+    src: '/assets/icons/star.svg',
+    alt: 'star',
+    height: 16,
+    width: 16,
   },
   logo: {
     src: '/assets/brand/little-george.svg',
@@ -18,6 +58,12 @@ const ASSET = {
   arrow_r: {
     src: '/assets/icons/arrow-right.svg',
     alt: 'arrow-right',
+    width: 16,
+    height: 16,
+  },
+  comment_icon: {
+    src: '/assets/icons/comment.svg',
+    alt: 'comment',
     width: 16,
     height: 16,
   },

@@ -24,3 +24,5 @@ async function getProductById(prodId: string) {
     logger.error(error)
   }
 }
+
+export default getProductById
