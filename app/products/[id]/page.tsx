@@ -117,7 +117,24 @@ const page = async ({ params: { id } }: Params) => {
               />
             </div>
           </div>
+          Modal
         </div>
+      </div>
+      <div className='flex flex-col gap-16 border-2 border-red-500'>
+        <div className='flex flex-col gap-5'>
+          <h3 className='text-2xl text-secondary font-semibold'>
+            Product Description
+          </h3>
+          <div className='flex flex-col gap-4'>
+            {product?.description?.split('\n')}
+          </div>
+        </div>
+        <button className='btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]'>
+          <Image {...ASSET.btn_icon} />{' '}
+          <Link href='/' className='text-base text-white'>
+            ADD TO CART
+          </Link>
+        </button>
       </div>
     </div>
   )
