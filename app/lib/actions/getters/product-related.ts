@@ -5,15 +5,21 @@ import { connectDb } from '@lib/db'
 import { logger } from '@utils'
 import { Product } from '@lib/models'
 
-async function getRelatedProd() {
+async function getRelatedProduct(productId: string) {
   try {
     connectDb()
-    const products = await Product.find()
 
-    return products
+    const currentProduct = await Product.findById(productId)
+
+    if (!currentProduct) return null
+    const relatedProduct = await Product.find({
+      _id: { $ne: productId },
+    }).limit(3)
+
+    return relatedProduct
   } catch (error: any) {
     logger.error(error)
   }
 }
 
-export default getRelatedProd
+export default getRelatedProduct
