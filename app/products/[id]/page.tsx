@@ -5,7 +5,8 @@ import { PriceInfoCard, ProductDetails } from '@components/Product'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Params, Product } from '@types'
-import { getProductById } from '@lib/actions/getters'
+import { getProductById, getRelatedProduct } from '@lib/actions/getters'
+import { relatedProducts } from '@lib/actions'
 import { redirect } from 'next/navigation'
 // @assets
 import { AiFillAmazonCircle } from 'react-icons/ai'
@@ -16,6 +17,8 @@ import { formatNum } from '@utils'
 
 const page = async ({ params: { id } }: Params) => {
   const product: Product = await getProductById(id)
+
+  const relatedProductsId = getRelatedProduct(id)
 
   if (!product) redirect('/')
   return (
@@ -136,6 +139,12 @@ const page = async ({ params: { id } }: Params) => {
           </Link>
         </button>
       </div>
+
+      {relatedProductsId && relatedProductsId?.length > 0 && (
+        <div className='py-14 flex flex-col gap2 w-full'>
+          <p className='section-text'>Related Products</p>
+        </div>
+      )}
     </div>
   )
 }
