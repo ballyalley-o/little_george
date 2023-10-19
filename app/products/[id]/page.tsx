@@ -18,9 +18,9 @@ import { formatNum } from '@utils'
 const page = async ({ params: { id } }: Params) => {
   const product: Product = await getProductById(id)
 
-  const relatedProductsId = getRelatedProduct(id)
-
   if (!product) redirect('/')
+  const relatedProducts = await getRelatedProduct(id)
+
   return (
     <div className='product-container'>
       <div className='flex gap-28 xl:flex-row flex-col'>
@@ -140,7 +140,7 @@ const page = async ({ params: { id } }: Params) => {
         </button>
       </div>
 
-      {relatedProductsId && relatedProductsId?.length > 0 && (
+      {relatedProducts && relatedProducts?.length > 0 && (
         <div className='py-14 flex flex-col gap2 w-full'>
           <p className='section-text'>Related Products</p>
         </div>
