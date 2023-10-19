@@ -24,11 +24,11 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     currentPrice: {
-      type: String,
+      type: Number,
       required: true,
     },
     originalPrice: {
-      type: String,
+      type: Number,
       required: true,
     },
     priceHistory: [
