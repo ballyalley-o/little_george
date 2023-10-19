@@ -12,11 +12,11 @@ async function getRelatedProduct(productId: string) {
     const currentProduct = await Product.findById(productId)
 
     if (!currentProduct) return null
-    const relatedProduct = await Product.find({
+    const relatedProducts = await Product.find({
       _id: { $ne: productId },
     }).limit(3)
 
-    return relatedProduct
+    return relatedProducts
   } catch (error: any) {
     logger.error(error)
   }
