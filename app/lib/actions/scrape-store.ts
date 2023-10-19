@@ -22,7 +22,7 @@ async function scrapeAndStoreProduct(prodUrl: string) {
     connectDb()
     const scrapedProd = await scrapeProduct(prodUrl)
 
-    if (!scrapeProduct) return
+    if (!scrapedProd) return
 
     let product = scrapedProd
     const existingProd = await Product.findOne({ url: scrapedProd?.url })
@@ -43,7 +43,7 @@ async function scrapeAndStoreProduct(prodUrl: string) {
     }
 
     const newProd = await Product.findOneAndUpdate(
-      { url: scrapedProd?.url },
+      { url: scrapedProd.url },
       product,
       { upsert: true, new: true }
     )

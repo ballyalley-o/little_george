@@ -4,6 +4,10 @@ const ASSET = {
       width: 20,
       height: 20,
     },
+    btn_icon: {
+      width: 22,
+      height: 22,
+    },
     price_info: {
       width: 24,
       height: 24,
@@ -30,6 +34,12 @@ const ASSET = {
     alt: 'heart',
     width: 20,
     height: 20,
+  },
+  btn_icon: {
+    src: '/assets/icons/bag.svg',
+    alt: 'check',
+    width: 22,
+    height: 22,
   },
   bookmark_icon: {
     src: '/assets/icons/bookmark.svg',

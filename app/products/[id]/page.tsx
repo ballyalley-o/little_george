@@ -5,7 +5,8 @@ import { PriceInfoCard, ProductDetails } from '@components/Product'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Params, Product } from '@types'
-import { getProductById } from '@lib/actions/getters'
+import { getProductById, getRelatedProduct } from '@lib/actions/getters'
+import { relatedProducts } from '@lib/actions'
 import { redirect } from 'next/navigation'
 // @assets
 import { AiFillAmazonCircle } from 'react-icons/ai'
@@ -16,6 +17,8 @@ import { formatNum } from '@utils'
 
 const page = async ({ params: { id } }: Params) => {
   const product: Product = await getProductById(id)
+
+  const relatedProductsId = getRelatedProduct(id)
 
   if (!product) redirect('/')
   return (
@@ -117,8 +120,31 @@ const page = async ({ params: { id } }: Params) => {
               />
             </div>
           </div>
+          Modal
         </div>
       </div>
+      <div className='flex flex-col gap-16 border-2 border-red-500'>
+        <div className='flex flex-col gap-5'>
+          <h3 className='text-2xl text-secondary font-semibold'>
+            Product Description
+          </h3>
+          <div className='flex flex-col gap-4'>
+            {product?.description?.split('\n')}
+          </div>
+        </div>
+        <button className='btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]'>
+          <Image {...ASSET.btn_icon} />{' '}
+          <Link href='/' className='text-base text-white'>
+            ADD TO CART
+          </Link>
+        </button>
+      </div>
+
+      {relatedProductsId && relatedProductsId?.length > 0 && (
+        <div className='py-14 flex flex-col gap2 w-full'>
+          <p className='section-text'>Related Products</p>
+        </div>
+      )}
     </div>
   )
 }

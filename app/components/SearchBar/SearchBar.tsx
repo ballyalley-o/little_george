@@ -17,7 +17,6 @@ const SearchBar = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
     const isLinkValid = isAmazonProductValid(searchPrompt)
 
     if (!isLinkValid) return toast.error('Provide a Valid Link')
@@ -32,6 +31,7 @@ const SearchBar = () => {
       setIsLoading(false)
     }
   }
+
   return (
     <form className='flex flex-wrap gap-4 mt-12' onSubmit={handleSubmit}>
       <input
