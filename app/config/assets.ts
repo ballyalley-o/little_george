@@ -1,3 +1,5 @@
+import { Close } from '@types'
+
 const ASSET = {
   sizes: {
     _def_icon: {
@@ -29,6 +31,22 @@ const ASSET = {
       height: 484,
     },
   },
+  close: <T>(size: Close, close: T) => {
+    return {
+      src: '/assets/icons/x-close.svg',
+      alt: 'close',
+      width: size.w,
+      height: size.h,
+      className: 'cursor-pointer',
+      onClick: close,
+    }
+  },
+  mail: {
+    src: '/assets/icons/mail.svg',
+    alt: 'mail',
+    width: 18,
+    height: 18,
+  },
   heart_icon: {
     src: '/assets/icons/red-heart.svg',
     alt: 'heart',
@@ -59,11 +77,13 @@ const ASSET = {
     height: 16,
     width: 16,
   },
-  logo: {
-    src: '/assets/brand/little-george.svg',
-    width: 27,
-    height: 27,
-    alt: 'brand-logo',
+  logo: (w: number = 27, h: number = 27) => {
+    return {
+      src: '/assets/brand/little-george.svg',
+      width: w,
+      height: h,
+      alt: 'brand-logo',
+    }
   },
   arrow_r: {
     src: '/assets/icons/arrow-right.svg',

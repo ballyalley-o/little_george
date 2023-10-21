@@ -1,6 +1,7 @@
 import React from 'react'
 // @components
 import { PriceInfoCard, ProductDetails } from '@components/Product'
+import { ProductCard, Modal } from '@components'
 // @types
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,9 +19,9 @@ import { formatNum } from '@utils'
 const page = async ({ params: { id } }: Params) => {
   const product: Product = await getProductById(id)
 
-  const relatedProductsId = getRelatedProduct(id)
-
   if (!product) redirect('/')
+  const relatedProducts = await getRelatedProduct(id)
+
   return (
     <div className='product-container'>
       <div className='flex gap-28 xl:flex-row flex-col'>
@@ -97,6 +98,14 @@ const page = async ({ params: { id } }: Params) => {
           <div className='my-7 flex flex-col gap-5'>
             <div className='flex gap-5 flex-wrap'>
               <PriceInfoCard
+                title='Current Price'
+                icon='/assets/icons/chart.svg'
+                value={`${product.currency} ${formatNum(
+                  product.currentPrice
+                )} `}
+                borderColor='#B6DBFF'
+              />
+              <PriceInfoCard
                 title='Average Price'
                 icon='/assets/icons/chart.svg'
                 value={`${product.currency} ${formatNum(
@@ -105,7 +114,7 @@ const page = async ({ params: { id } }: Params) => {
                 borderColor='#B6DBFF'
               />
               <PriceInfoCard
-                title='Current Price'
+                title='Highest Price'
                 icon='/assets/icons/arrow-up.svg'
                 value={`${product.currency} ${formatNum(
                   product.highestPrice
@@ -113,17 +122,17 @@ const page = async ({ params: { id } }: Params) => {
                 borderColor='#B6DBFF'
               />
               <PriceInfoCard
-                title='Average Price'
+                title='Lowest Price'
                 icon='/assets/icons/arrow-down.svg'
                 value={`${product.currency} ${formatNum(product.lowestPrice)} `}
                 borderColor='#BEFFC5'
               />
             </div>
           </div>
-          Modal
+          <Modal />
         </div>
       </div>
-      <div className='flex flex-col gap-16 border-2 border-red-500'>
+      <div className='flex flex-col gap-16'>
         <div className='flex flex-col gap-5'>
           <h3 className='text-2xl text-secondary font-semibold'>
             Product Description
@@ -140,9 +149,14 @@ const page = async ({ params: { id } }: Params) => {
         </button>
       </div>
 
-      {relatedProductsId && relatedProductsId?.length > 0 && (
+      {relatedProducts && relatedProducts?.length > 0 && (
         <div className='py-14 flex flex-col gap2 w-full'>
           <p className='section-text'>Related Products</p>
+          <div className='flex flex-wrap gap-10 mt-7 w-full'>
+            {relatedProducts.map((product, index) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
         </div>
       )}
     </div>
