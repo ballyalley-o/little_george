@@ -1,7 +1,7 @@
 import React from 'react'
 // @components
 import { PriceInfoCard, ProductDetails } from '@components/Product'
-import { ProductCard } from '@components'
+import { ProductCard, Modal } from '@components'
 // @types
 import Image from 'next/image'
 import Link from 'next/link'
@@ -98,6 +98,14 @@ const page = async ({ params: { id } }: Params) => {
           <div className='my-7 flex flex-col gap-5'>
             <div className='flex gap-5 flex-wrap'>
               <PriceInfoCard
+                title='Current Price'
+                icon='/assets/icons/chart.svg'
+                value={`${product.currency} ${formatNum(
+                  product.currentPrice
+                )} `}
+                borderColor='#B6DBFF'
+              />
+              <PriceInfoCard
                 title='Average Price'
                 icon='/assets/icons/chart.svg'
                 value={`${product.currency} ${formatNum(
@@ -106,7 +114,7 @@ const page = async ({ params: { id } }: Params) => {
                 borderColor='#B6DBFF'
               />
               <PriceInfoCard
-                title='Current Price'
+                title='Highest Price'
                 icon='/assets/icons/arrow-up.svg'
                 value={`${product.currency} ${formatNum(
                   product.highestPrice
@@ -114,14 +122,14 @@ const page = async ({ params: { id } }: Params) => {
                 borderColor='#B6DBFF'
               />
               <PriceInfoCard
-                title='Average Price'
+                title='Lowest Price'
                 icon='/assets/icons/arrow-down.svg'
                 value={`${product.currency} ${formatNum(product.lowestPrice)} `}
                 borderColor='#BEFFC5'
               />
             </div>
           </div>
-          Modal
+          <Modal />
         </div>
       </div>
       <div className='flex flex-col gap-16'>
