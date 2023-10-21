@@ -8,6 +8,11 @@ export type User = {
   email: string
 }
 
+export type Close = {
+  w: number | 20
+  h: number | 20
+}
+
 export type Product = {
   _id?: string
   url: string
