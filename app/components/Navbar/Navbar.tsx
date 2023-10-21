@@ -11,7 +11,7 @@ const Navbar = () => {
       <nav className='nav'>
         <Link href='/' className='flex items-center gap-1'>
           <p className='nav-brand'>little</p>
-          <Image {...ASSET.logo} />
+          <Image {...ASSET.logo()} />
           <p className='nav-brand-2'>george</p>
         </Link>
         <div className='flex items-center gap-5'>
