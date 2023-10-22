@@ -10,3 +10,7 @@ export interface PriceInfo {
   value: string
   borderColor: string
 }
+
+export interface ModalProps {
+  productId: string
+}

@@ -34,7 +34,7 @@ export type Product = {
   users?: User[]
 }
 
-export type Notification =
+export type NotificationTypes =
   | 'WELCOME'
   | 'CHANGE_OF_STOCK'
   | 'LOWEST_PRICE'
