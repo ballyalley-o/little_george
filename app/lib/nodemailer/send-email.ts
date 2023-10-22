@@ -1,5 +1,7 @@
 'use server'
 
+import path from 'path'
+import fs from 'fs'
 import { EmailContent } from '@types'
 import nodemailer from 'nodemailer'
 // @globals
@@ -7,8 +9,10 @@ import { GLOBAL } from '@config'
 // @logger
 import { logger } from '@utils'
 import { LogLevel } from '@interfaces/logger'
-// @assets
-import { toast } from 'react-toastify'
+
+// const cssLoc = path.resolve('app', 'assets', 'css')
+// const cssFile = path.join(cssLoc, 'tailwind.css')
+// const cssContent = fs.readFileSync(cssFile, 'utf-8')
 
 const transporter = nodemailer.createTransport({
   pool: true,
