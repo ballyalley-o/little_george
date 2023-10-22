@@ -19,6 +19,9 @@ const GLOBAL = {
   // assets
   brand_icon: ASSET.nav,
   nav_icon_size: ASSET.sizes.navIcon,
+  // nodemailer
+  stp_email: process.env.STP_EMAIL,
+  stp_pw: process.env.STP_PW,
 }
 
 export default GLOBAL
