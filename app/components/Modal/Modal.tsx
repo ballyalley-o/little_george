@@ -1,17 +1,40 @@
 'use client'
 
-import { Fragment, useState } from 'react'
+import { FormEvent, Fragment, useState } from 'react'
 // @components
 import { Dialog, Transition } from '@headlessui/react'
+import { Spinner } from '@components'
 import Image from 'next/image'
 // @globals & @assets
 import { ASSET } from '@config'
+// @interfaces
+import { ModalProps } from '@interfaces/components'
+import { addEmailToProduct } from '@lib/actions'
+import { toast } from 'react-toastify'
 
-const Modal = () => {
+const Modal = ({ productId }: ModalProps) => {
   let [isOpen, setIsOpen] = useState(true)
+  const [email, setEmail] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleOpen = () => setIsOpen(true)
   const handleClose = () => setIsOpen(false)
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      await addEmailToProduct(productId, email)
+      toast.success('Email Sent')
+    } catch (error: any) {
+      toast.error(error)
+    }
+
+    setIsSubmitting(false)
+    setEmail('')
+    handleClose()
+  }
+  const handleOnChange = (e: any) => setEmail(e.target.value)
 
   return (
     <>
@@ -59,7 +82,7 @@ const Modal = () => {
                     Register your email-address below
                   </p>
                 </div>
-                <form action='' className='flex flex-col mt-5'>
+                <form className='flex flex-col mt-5' onSubmit={handleSubmit}>
                   <label
                     htmlFor='email'
                     className='text-sm font-medium text-gray-700'
@@ -69,15 +92,17 @@ const Modal = () => {
                   <div className='dialog-input_container'>
                     <Image {...ASSET.mail} />
                     <input
+                      required
                       type='email'
                       id='email'
                       placeholder='E-mail Address'
                       className='dialog-input'
-                      required
+                      value={email}
+                      onChange={handleOnChange}
                     />
                   </div>
                   <button type='submit' className='dialog-btn'>
-                    Track
+                    {isSubmitting ? 'Tracking...' : 'Track'}
                   </button>
                 </form>
               </div>

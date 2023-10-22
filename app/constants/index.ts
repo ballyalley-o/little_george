@@ -1,3 +1,5 @@
 export { default as BRAND } from '@constants/brand'
 export { default as TITLE } from '@constants/titles'
 export { default as REGEX } from '@constants/regex'
+export { default as NOTIFICATION } from '@constants/notification'
+export { default as MAIL_TEMPLATE } from '@constants/nodemailer'
