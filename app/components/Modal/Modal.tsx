@@ -27,7 +27,7 @@ const Modal = ({ productId }: ModalProps) => {
       await addEmailToProduct(productId, email)
       toast.success('Email Sent')
     } catch (error: any) {
-      toast.error(error)
+      toast.error(error.message)
     }
 
     setIsSubmitting(false)
