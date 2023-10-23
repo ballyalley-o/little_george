@@ -1,1 +1,5 @@
+export * as def from '@assets/styles/default'
 export * as hero from '@assets/styles/hero-carousel'
+export * as modal from '@assets/styles/modal'
+export * as form from '@assets/styles/form'
+export { default as ANIMATE } from '@assets/styles/animations-settings'
