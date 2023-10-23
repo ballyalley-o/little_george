@@ -1,6 +1,6 @@
-import { connectDb } from '@lib/db'
 import { NextResponse } from 'next/server'
 // @models
+import { connectDb } from '@lib/db'
 import { Product } from '@lib/models'
 import { generateEmailBody } from '@lib/nodemailer'
 import sendEmail from '@lib/nodemailer/send-email'
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
 
     if (!products) throw new Error('No product found')
 
-    const updatedProduct = await Promise.all(
+    const updatedProducts = await Promise.all(
       products.map(async (currProduct) => {
         const scrapedProduct = await scrapeProduct(currProduct.url)
 
@@ -77,7 +77,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       message: 'Ok',
-      data: updatedProduct,
+      data: updatedProducts,
     })
   } catch (error: any) {
     throw new Error(`Error in GET req: ${error}`)
