@@ -83,5 +83,3 @@ export async function GET(request: Request) {
     throw new Error(`Error in GET req: ${error}`)
   }
 }
-
-export default GET
