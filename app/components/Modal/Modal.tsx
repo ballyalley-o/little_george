@@ -3,14 +3,17 @@
 import { FormEvent, Fragment, useState } from 'react'
 // @components
 import { Dialog, Transition } from '@headlessui/react'
-import { Spinner } from '@components'
+import { FormBtn, FormInput, Spinner } from '@components'
 import Image from 'next/image'
-// @globals & @assets
+// @styles
+import * as _ from '@assets/styles'
+// @globals, @constants & @assets
 import { ASSET } from '@config'
+import { SNACKS, CONTENT } from '@constants'
+import { toast } from 'react-toastify'
 // @interfaces
 import { ModalProps } from '@interfaces/components'
 import { addEmailToProduct } from '@lib/actions'
-import { toast } from 'react-toastify'
 
 const Modal = ({ productId }: ModalProps) => {
   let [isOpen, setIsOpen] = useState(true)
@@ -25,7 +28,7 @@ const Modal = ({ productId }: ModalProps) => {
 
     try {
       await addEmailToProduct(productId, email)
-      toast.success('Email Sent')
+      toast.success(SNACKS.email.sent)
     } catch (error: any) {
       toast.error(error)
     }
@@ -37,72 +40,44 @@ const Modal = ({ productId }: ModalProps) => {
 
   return (
     <>
-      <button type='button' className='btn' onClick={handleOpen}>
-        Track
+      <button type='button' className={_.def.StyledBtn} onClick={handleOpen}>
+        {CONTENT.dialog.btn}
       </button>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' onClose={handleClose} className='dialog-container'>
-          <div className='min-h-screen px-4 text-center'>
-            <Transition.Child
-              as={Fragment}
-              enter='ease-out duration-300'
-              enterFrom='opacity-0'
-              enterTo='opacity-100'
-              leave='ease-in duration-100'
-              leaveFrom='opacity-100'
-              leaveTo='opacity-0'
-            >
-              <Dialog.Overlay className='fixed inset-0' />
+        <Dialog
+          as='div'
+          onClose={handleClose}
+          className={_.modal.StyledContainerDiv}
+        >
+          <div className={_.modal.StyledCenteredDiv}>
+            <Transition.Child {..._.ANIMATE.dialog}>
+              <Dialog.Overlay className={_.modal.StyledDialogOverlay} />
             </Transition.Child>
-            <span
-              className='inline-block h-screen align-middle'
-              aria-hidden='true'
-            />
-            <Transition.Child
-              as={Fragment}
-              enter='ease-out duration-300'
-              enterFrom='opacity-0 scale-95'
-              enterTo='ease-in duration-200'
-              leaveFrom='opacity-100 scale-100'
-              leaveTo='opacity-0 scale-95'
-            >
-              <div className='dialog-content'>
-                <div className='flex flex-col'>
-                  <div className='flex justify-between'>
-                    <div className='p-3 border border-gray-200 rounded-10'>
+            <span className={_.modal.StyledSpan} aria-hidden='true' />
+            <Transition.Child {..._.ANIMATE.dialog_2}>
+              <div className={_.modal.StyledDialog}>
+                <div className={_.modal.StyledWrapperDiv}>
+                  <div className={_.modal.StyledDiv}>
+                    <div className={_.modal.StyledLogoWrapper}>
                       <Image {...ASSET.logo(28, 28)} />
                     </div>
                     <Image {...ASSET.close({ w: 20, h: 20 }, handleClose)} />
                   </div>
-                  <h2 className='dialog-head_text my-5'>
-                    Keep updated with this Product's Price activity
+                  <h2 className={_.modal.StyledHeadTextH2}>
+                    {CONTENT.dialog.head}
                   </h2>
-                  <p className='text-sm text-gray-600 mt02'>
-                    Register your email-address below
-                  </p>
+                  <p className={_.modal.StyledTextP}>{CONTENT.dialog.p}</p>
                 </div>
-                <form className='flex flex-col mt-5' onSubmit={handleSubmit}>
-                  <label
-                    htmlFor='email'
-                    className='text-sm font-medium text-gray-700'
-                  >
-                    Email Address
-                  </label>
-                  <div className='dialog-input_container'>
-                    <Image {...ASSET.mail} />
-                    <input
-                      required
-                      type='email'
-                      id='email'
-                      placeholder='E-mail Address'
-                      className='dialog-input'
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <button type='submit' className='dialog-btn'>
-                    {isSubmitting ? 'Tracking...' : 'Track'}
-                  </button>
+                <form
+                  className={_.modal.StyledWrapperForm}
+                  onSubmit={handleSubmit}
+                >
+                  <FormInput
+                    {...CONTENT.form.email}
+                    value={email}
+                    setChange={setEmail}
+                  />
+                  <FormBtn {...CONTENT.form.btn_track} loading={isSubmitting} />
                 </form>
               </div>
             </Transition.Child>
