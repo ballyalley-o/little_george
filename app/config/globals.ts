@@ -3,6 +3,7 @@ import { ASSET } from '@config'
 const GLOBAL = {
   // server
   api: '',
+  currency: 'NZ$',
   // scraper
   bd_user: process.env.BRIGHT_DATA_USER,
   bd_pass: process.env.BRIGHT_DATA_PASS,
