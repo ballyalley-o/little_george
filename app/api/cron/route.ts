@@ -13,6 +13,8 @@ import {
 } from '@utils/getters'
 // @globals
 import { GLOBAL } from '@config'
+// @constants
+import { SNACKS } from '@constants'
 
 export const maxDuration = GLOBAL.max_duration
 export const dynamic = 'force-dynamic'
@@ -25,13 +27,13 @@ export async function GET(request: Request) {
     // scrape and update
     const products = await Product.find({})
 
-    if (!products) throw new Error('No product found')
+    if (!products) throw new Error(SNACKS.error.no_product)
 
     const updatedProducts = await Promise.all(
       products.map(async (currProduct) => {
         const scrapedProduct = await scrapeProduct(currProduct.url)
 
-        if (!scrapedProduct) throw new Error('No product found')
+        if (!scrapedProduct) throw new Error(SNACKS.error.no_product)
 
         const updatedPriceHistory = [
           ...currProduct.priceHistory,
@@ -80,6 +82,6 @@ export async function GET(request: Request) {
       data: updatedProducts,
     })
   } catch (error: any) {
-    throw new Error(`Error in GET req: ${error.message}`)
+    throw new Error(SNACKS.error.get_err(error))
   }
 }
