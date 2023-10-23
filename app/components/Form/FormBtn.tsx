@@ -1,16 +1,15 @@
 'use client'
 
 import * as _ from '@assets/styles'
-// @component
-import { Spinner } from '@components'
 // @interface
 import { FormBtn } from '@interfaces/components'
 
 const FormBtn = ({ type, label, loading }: FormBtn) => {
+  const labelLoading = label + 'ing...'
   return (
     <>
       <button type={type} className={_.form.StyledFormBtn}>
-        {loading ? <Spinner /> : label}
+        {loading ? labelLoading : label}
       </button>
     </>
   )
