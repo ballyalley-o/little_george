@@ -23,7 +23,7 @@ const GLOBAL = {
   stp_email: process.env.STP_EMAIL,
   stp_pw: process.env.STP_PW,
   // cron
-  max_duration: 300,
+  max_duration: 10,
   dynamic: 'force-dynamic',
   revalidate: 0,
 }
