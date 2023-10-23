@@ -1,4 +1,9 @@
-import { welcomeHTML } from '@assets/html'
+import {
+  welcomeHTML,
+  changeStockHTML,
+  priceLowHTML,
+  thresholdMetHTML,
+} from '@assets/html'
 
 const THRESHOLD_PERCENTAGE = 40
 
@@ -152,30 +157,18 @@ const MAIL_TEMPLATE = {
   on_stock: {
     subject: (shortTitle: any) =>
       ` ${shortTitle} is now back in Stock, Grab it now!`,
-    body: (product: any) => ` <div>
-          <h4>Hey, ${product.title} is now restocked! Grab yours before they run out again!</h4>
-          <p>See the product <a href="${product.url}" target="_blank" rel="noopener noreferrer">here</a>.</p>
-        </div>
-        `,
+    body: (product: any) => changeStockHTML(product),
   },
   // @price_low
   price_low: {
     subject: (shortTitle: any) => `Lowest Price Alert for ${shortTitle}`,
-    body: (product: any) => ` <div>
-          <h4>Hey, ${product.title} has reached its lowest price ever!!</h4>
-          <p>Grab the product <a href="${product.url}" target="_blank" rel="noopener noreferrer">here</a> now.</p>
-        </div>
-    `,
+    body: (product: any) => priceLowHTML(product),
   },
   // @threshold_met
   threshold_met: {
     subject: (shortTitle: any) => `Discount Alert for ${shortTitle}`,
-    body: (product: any) => `
-        <div>
-          <h4>Hey, ${product.title} is now available at a discount more than ${THRESHOLD_PERCENTAGE}%!</h4>
-          <p>Grab it right away from <a href="${product.url}" target="_blank" rel="noopener noreferrer">here</a>.</p>
-        </div>
-  `,
+    body: (product: any, threshold: any) =>
+      thresholdMetHTML(product, THRESHOLD_PERCENTAGE),
   },
 }
 
