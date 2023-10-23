@@ -80,6 +80,6 @@ export async function GET(request: Request) {
       data: updatedProducts,
     })
   } catch (error: any) {
-    throw new Error(`Error in GET req: ${error}`)
+    throw new Error(`Error in GET req: ${error.message}`)
   }
 }
