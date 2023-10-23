@@ -9,6 +9,8 @@ import {
   extractDiscountRate,
   extractDescription,
 } from '@utils'
+// @constants
+import { SNACKS, CHEERIO } from '@constants'
 
 async function scrapeProduct(url: string) {
   if (!url) return
@@ -30,40 +32,19 @@ async function scrapeProduct(url: string) {
   try {
     const resp = await axios.get(url, options)
     const $ = cheerio.load(resp.data)
-    const title = $('#productTitle').text().trim()
-    const currentPrice = extractPrice(
-      $('.priceToPay span.a-price-whole'),
-      $('a.size.base.a-color-price'),
-      $('.a-button-selected .a-color-base'),
-      $('.a-price.a-text-price')
-    )
-
-    const originalPrice = extractPrice(
-      $('#priceblock_ourprice'),
-      $('.a-price.a-text-price span.a-offscreen'),
-      $('#listPrice'),
-      $('#priceblock_dealprice'),
-      $('.a-size-base.a-color-price')
-    )
-
-    const outOfStock =
-      $('#availability span').text().trim().toLowerCase() ===
-      'currently unavailable'
-
-    const images =
-      $('#imgBlkFront').attr('data-a-dynamic-image') ||
-      $('#landingImage').attr('data-a-dynamic-image') ||
-      '{}'
-
-    const imgUrls = Object.keys(JSON.parse(images))
-    const currency = extractCurrency($('.a-price-symbol'))
-    const discountRate = extractDiscountRate($('.savingsPercentage'))
+    const title = $(CHEERIO.title.id).text().trim()
+    const currentPrice = extractPrice(CHEERIO.current_price($))
+    const originalPrice = extractPrice(CHEERIO.original_price($))
+    const outOfStock = CHEERIO.os($)
+    const imgUrls = Object.keys(JSON.parse(CHEERIO.images($)))
+    const currency = extractCurrency($(CHEERIO.currency.nz))
+    const discountRate = extractDiscountRate($(CHEERIO.discountRate.def))
     const description = extractDescription($)
 
     // build or reconstruct scraped data response
     const data = {
       url,
-      currency: currency || 'NZ$',
+      currency: currency || GLOBAL.currency,
       image: imgUrls[0],
       title,
       currentPrice: Number(currentPrice) || Number(originalPrice),
@@ -81,7 +62,7 @@ async function scrapeProduct(url: string) {
     }
     return data
   } catch (error: any) {
-    throw new Error(`Failed to scraped product: ${error}`)
+    throw new Error(SNACKS.error.scrape_err(error))
   }
 }
 
