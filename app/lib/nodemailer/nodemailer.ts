@@ -50,7 +50,7 @@ const generateEmailBody = async (
 
     case NOTIFICATION.THRESHOLD_MET:
       subject = MAIL_TEMPLATE.threshold_met.subject(shortTitle)
-      body = MAIL_TEMPLATE.threshold_met.body(product)
+      body = MAIL_TEMPLATE.threshold_met.body(product, 40)
       break
 
     default:
