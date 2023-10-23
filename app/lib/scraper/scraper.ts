@@ -63,7 +63,7 @@ async function scrapeProduct(url: string) {
     // build or reconstruct scraped data response
     const data = {
       url,
-      currency: currency || '$',
+      currency: currency || 'NZ$',
       image: imgUrls[0],
       title,
       currentPrice: Number(currentPrice) || Number(originalPrice),
@@ -73,13 +73,12 @@ async function scrapeProduct(url: string) {
       category: 'category',
       reviewsCount: 100,
       stars: 4.5,
-      isOutofStock: outOfStock,
+      isOutOfStock: outOfStock,
       description,
       lowestPrice: Number(currentPrice) || Number(originalPrice),
       highestPrice: Number(originalPrice) || Number(currentPrice),
       averagePrice: Number(currentPrice) || Number(originalPrice),
     }
-
     return data
   } catch (error: any) {
     throw new Error(`Failed to scraped product: ${error}`)
