@@ -1,4 +1,5 @@
 import { connectDb } from '@lib/db'
+import { NextResponse } from 'next/server'
 // @models
 import { Product } from '@lib/models'
 import { generateEmailBody } from '@lib/nodemailer'
@@ -10,7 +11,12 @@ import {
   getHighestPrice,
   getLowestPrice,
 } from '@utils/getters'
-import { NextResponse } from 'next/server'
+// @globals
+import { GLOBAL } from '@config'
+
+export const maxDuration = GLOBAL.max_duration
+export const dynamic = GLOBAL.dynamic
+export const revalidate = GLOBAL.revalidate
 
 export async function GET(request: Request) {
   try {
