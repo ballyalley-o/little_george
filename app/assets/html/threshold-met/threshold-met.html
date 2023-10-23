@@ -1,22 +1,9 @@
-import {
-  welcomeHTML,
-  changeStockHTML,
-  priceLowHTML,
-  thresholdMetHTML,
-} from '@assets/html'
-
-const THRESHOLD_PERCENTAGE = 40
-
-const MAIL_TEMPLATE = {
-  // @welcome
-  welcome: {
-    subject: `Welcome to little george`,
-    body: (product: any) => `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to Little George</title>
+    <title>Your Product Update</title>
     <style>
       * {
         margin: 0;
@@ -110,31 +97,23 @@ const MAIL_TEMPLATE = {
           alt="little-george-cover"
           class="cover_img"
         />
-        <div align="center" class="head_div">
-          <h2>Welcome to Little George 🚀</h2>
-          <p>You are now tracking ${product.title}.</p>
-          <p>Here's an example of how you'll receive updates:</p>
-        </div>
-        <div class="" align="center">
-          <h3>${product.title} is back in stock!</h3>
-          <p>
-            We're excited to let you know that ${product.title} is now back in
-            stock.
-          </p>
+        <div class="head_div" align="center">
+          <h3>Hey, ${product.title} has reached its lowest price ever</h3>
           <div align="center">
+            <p>Price has dropped down to ${product.discountRate}%</p>
             <p>
               <a
                 href="${product.url}"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button type="button">Jump to Amazon</button>
+                <button type="button">Check it out, NOW!</button>
               </a>
             </p>
           </div>
           <div align="center">
             <img
-              src="https://i.ibb.co/pwFBRMC/Screenshot-2023-09-26-at-1-47-50-AM.png"
+              src="${product.image}"
               alt="Product Image"
               class="content_img"
             />
@@ -151,25 +130,3 @@ const MAIL_TEMPLATE = {
     </div>
   </body>
 </html>
-`,
-  },
-  // @on_stock
-  on_stock: {
-    subject: (shortTitle: any) =>
-      ` ${shortTitle} is now back in Stock, Grab it now!`,
-    body: (product: any) => changeStockHTML(product),
-  },
-  // @price_low
-  price_low: {
-    subject: (shortTitle: any) => `Lowest Price Alert for ${shortTitle}`,
-    body: (product: any) => priceLowHTML(product),
-  },
-  // @threshold_met
-  threshold_met: {
-    subject: (shortTitle: any) => `Discount Alert for ${shortTitle}`,
-    body: (product: any, threshold: any) =>
-      thresholdMetHTML(product, THRESHOLD_PERCENTAGE),
-  },
-}
-
-export default MAIL_TEMPLATE

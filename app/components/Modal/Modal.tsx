@@ -34,7 +34,6 @@ const Modal = ({ productId }: ModalProps) => {
     setEmail('')
     handleClose()
   }
-  const handleOnChange = (e: any) => setEmail(e.target.value)
 
   return (
     <>
@@ -98,7 +97,7 @@ const Modal = ({ productId }: ModalProps) => {
                       placeholder='E-mail Address'
                       className='dialog-input'
                       value={email}
-                      onChange={handleOnChange}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <button type='submit' className='dialog-btn'>
