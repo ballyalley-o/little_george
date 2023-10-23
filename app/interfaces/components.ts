@@ -14,3 +14,18 @@ export interface PriceInfo {
 export interface ModalProps {
   productId: string
 }
+
+// form
+export interface FormBtn {
+  type: any
+  label: string
+  loading: any
+}
+
+export interface FormInput {
+  icon: any
+  type: string
+  label: string
+  value: any
+  setChange: Function
+}
