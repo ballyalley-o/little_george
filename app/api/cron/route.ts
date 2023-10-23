@@ -14,9 +14,9 @@ import {
 // @globals
 import { GLOBAL } from '@config'
 
-export const maxDuration = 10
+export const maxDuration = GLOBAL.max_duration
 export const dynamic = 'force-dynamic'
-export const revalidate = 0
+export const revalidate = GLOBAL.revalidate
 
 export async function GET(request: Request) {
   try {
