@@ -41,6 +41,14 @@ const ASSET = {
       onClick: close,
     }
   },
+  form: (icon: any) => {
+    return {
+      src: `/assets/icons/${icon}.svg`,
+      alt: 'mail',
+      width: 18,
+      height: 18,
+    }
+  },
   mail: {
     src: '/assets/icons/mail.svg',
     alt: 'mail',
