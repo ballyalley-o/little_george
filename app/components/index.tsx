@@ -12,3 +12,6 @@ export { default as ProductDetails } from '@components/Product/ProductDetails'
 export { default as PriceInfoCard } from '@components/Product/PriceInfoCard'
 // @modal
 export { default as Modal } from '@components/Modal/Modal'
+// @form
+export { default as FormInput } from '@components/Form/FormInput'
+export { default as FormBtn } from '@components/Form/FormBtn'
