@@ -1,6 +1,6 @@
 import React from 'react'
 // @components
-import { PriceInfoCard, ProductDetails } from '@components/Product'
+import { PriceInfoCard } from '@components/Product'
 import { ProductCard, Modal } from '@components'
 // @types
 import Image from 'next/image'

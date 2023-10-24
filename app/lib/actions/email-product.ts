@@ -27,6 +27,9 @@ async function addEmailToProduct(productId: string, userEmail: string) {
 
       await sendEmail(emailContent, [userEmail])
     }
+    // testing purposes only
+    // const emailContent = await generateEmailBody(product, 'CHANGE_OF_STOCK')
+    // await sendEmail(emailContent, [userEmail])
   } catch (error: any) {
     logger.error(error)
   }

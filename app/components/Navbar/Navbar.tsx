@@ -1,27 +1,25 @@
 import React from 'react'
 // @components
 import Image from 'next/image'
-import Link from 'next/link'
-// @globals & @assets
+import { NavBrand } from '@components'
+// @globals, @constants  & @assets
 import { ASSET, GLOBAL } from '@config'
+// @styles
+import * as _ from '@assets/styles'
 
 const Navbar = () => {
   return (
-    <header className='w-full'>
-      <nav className='nav'>
-        <Link href='/' className='flex items-center gap-1'>
-          <p className='nav-brand'>little</p>
-          <Image {...ASSET.logo()} />
-          <p className='nav-brand-2'>george</p>
-        </Link>
-        <div className='flex items-center gap-5'>
+    <header className={_.nav.StyledHeader}>
+      <nav className={_.nav.StyledNav}>
+        <NavBrand />
+        <div className={_.nav.StyledIconsContainer}>
           {ASSET.nav.map((icon) => (
             <Image
               key={icon.alt}
               src={icon.src}
               alt={icon.alt}
               {...GLOBAL.nav_icon_size}
-              className='object-contain'
+              className={_.nav.StyledImage}
             />
           ))}
         </div>

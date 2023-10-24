@@ -3,6 +3,7 @@ import { ASSET } from '@config'
 const GLOBAL = {
   // server
   api: '',
+  currency: 'NZ$',
   // scraper
   bd_user: process.env.BRIGHT_DATA_USER,
   bd_pass: process.env.BRIGHT_DATA_PASS,
@@ -18,6 +19,7 @@ const GLOBAL = {
   db_pw: process.env.DB_PW,
   // assets
   brand_icon: ASSET.nav,
+  brand_text: ['little', 'george'],
   nav_icon_size: ASSET.sizes.navIcon,
   // nodemailer
   stp_email: process.env.STP_EMAIL,
