@@ -2,6 +2,10 @@ const SNACKS = {
   db: {
     connecting: (db: any) => `Attempting to Connect to ${db}.. .`,
   },
+  link: {
+    invalid: 'Provide a Valid Link',
+    success: 'Successful Scrape',
+  },
   email: {
     sent: 'Email Sent',
   },
