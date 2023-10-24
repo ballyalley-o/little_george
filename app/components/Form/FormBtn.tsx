@@ -4,11 +4,11 @@ import * as _ from '@assets/styles'
 // @interface
 import { FormBtn } from '@interfaces/components'
 
-const FormBtn = ({ type, label, loading }: FormBtn) => {
+const FormBtn = ({ type, label, loading, disabled, className }: FormBtn) => {
   const labelLoading = label + 'ing...'
   return (
     <>
-      <button type={type} className={_.form.StyledFormBtn}>
+      <button type={type} className={className} disabled={disabled}>
         {loading ? labelLoading : label}
       </button>
     </>
