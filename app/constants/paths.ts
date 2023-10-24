@@ -1,1 +1,5 @@
-const PATH = {}
+const PATH = {
+  home: '/',
+}
+
+export default PATH
