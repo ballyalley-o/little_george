@@ -2,9 +2,11 @@
 
 import { FormEvent, useState } from 'react'
 // @components
-import { Spinner } from '@components'
+import { Spinner, FormInput, FormBtn } from '@components'
+// @styles
+import * as _ from '@assets/styles/searchbar'
 // @constants
-import { TITLE } from '@constants'
+import { TITLE, SNACKS, CONTENT } from '@constants'
 // @assets
 import { scrapeAndStoreProduct } from '@lib/actions'
 import { toast } from 'react-toastify'
@@ -19,12 +21,12 @@ const SearchBar = () => {
     e.preventDefault()
     const isLinkValid = isAmazonProductValid(searchPrompt)
 
-    if (!isLinkValid) return toast.error('Provide a Valid Link')
+    if (!isLinkValid) return toast.error(SNACKS.link.invalid)
 
     try {
       setIsLoading(true)
       const prod = await scrapeAndStoreProduct(searchPrompt)
-      toast.success('Successful Scrape')
+      toast.success(SNACKS.link.success)
     } catch (error: any) {
       toast.error(error.message)
     } finally {
@@ -33,21 +35,18 @@ const SearchBar = () => {
   }
 
   return (
-    <form className='flex flex-wrap gap-4 mt-12' onSubmit={handleSubmit}>
-      <input
-        type='text'
+    <form className={_.StyledWrapperForm} onSubmit={handleSubmit}>
+      <FormInput
+        {...CONTENT.form.searchbar}
         value={searchPrompt}
-        placeholder='Enter Product'
-        className='searchbar-input'
-        onChange={(e: any) => setSearchPrompt(e.target.value)}
+        setChange={setSearchPrompt}
+        searchBar
       />
-      <button
-        type='submit'
-        className='searchbar-btn'
+      <FormBtn
+        {...CONTENT.form.btn_search}
+        loading={isLoading}
         disabled={searchPrompt === ''}
-      >
-        {isLoading ? <Spinner /> : TITLE.search}
-      </button>
+      />
     </form>
   )
 }
