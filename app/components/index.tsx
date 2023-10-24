@@ -2,6 +2,7 @@
 export { default as HeroCarousel } from '@components/HeroCarousel/HeroCarousel'
 // @navbar
 export { default as Navbar } from '@components/Navbar/Navbar'
+export { default as NavBrand } from '@components/Navbar/NavBrand'
 // @spinner
 export { default as SearchBar } from '@components/SearchBar/SearchBar'
 // @spinner
