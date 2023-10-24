@@ -74,10 +74,15 @@ const Modal = ({ productId }: ModalProps) => {
                 >
                   <FormInput
                     {...CONTENT.form.email}
+                    className={_.form.StyledFormInput}
+                    searchBar={false}
                     value={email}
                     setChange={setEmail}
                   />
-                  <FormBtn {...CONTENT.form.btn_track} loading={isSubmitting} />
+                  <FormBtn
+                    {...CONTENT.form.btn_track(email)}
+                    loading={isSubmitting}
+                  />
                 </form>
               </div>
             </Transition.Child>
