@@ -2,12 +2,12 @@ import React from 'react'
 // @components
 import { PriceInfoCard } from '@components/Product'
 import { ProductCard, Modal } from '@components'
+import * as _ from '@assets/styles/product-page'
 // @types
 import Image from 'next/image'
 import Link from 'next/link'
 import { Params, Product } from '@types'
 import { getProductById, getRelatedProduct } from '@lib/actions/getters'
-import { relatedProducts } from '@lib/actions'
 import { redirect } from 'next/navigation'
 // @assets
 import { AiFillAmazonCircle } from 'react-icons/ai'
@@ -23,14 +23,14 @@ const page = async ({ params: { id } }: Params) => {
   const relatedProducts = await getRelatedProduct(id)
 
   return (
-    <div className='product-container'>
-      <div className='flex gap-28 xl:flex-row flex-col'>
-        <div className='product-image'>
+    <div className={_.StyledContainerDiv}>
+      <div className={_.StyledWrapperDiv}>
+        <div className={_.StyledImageDiv}>
           <Image
             src={product.image}
             alt={product.title}
             {...ASSET.sizes.product_detail}
-            className='mx-auto'
+            className={_.StyledImage}
           />
         </div>
         <div className='flex-1 flex flex-col'>
