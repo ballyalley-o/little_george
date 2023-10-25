@@ -16,9 +16,9 @@ import { GLOBAL } from '@config'
 // @constants
 import { SNACKS } from '@constants'
 
-export const maxDuration = GLOBAL.max_duration
+export const maxDuration = 10
 export const dynamic = 'force-dynamic'
-export const revalidate = GLOBAL.revalidate
+export const revalidate = 0
 
 export async function GET(request: Request) {
   try {
