@@ -11,6 +11,10 @@ export { default as Spinner } from '@components/Spinner/Spinner'
 export { default as ProductCard } from '@components/Product/ProductCard'
 export { default as ProductDetails } from '@components/Product/ProductDetails'
 export { default as PriceInfoCard } from '@components/Product/PriceInfoCard'
+export { default as ProductRelated } from '@components/Product/ProductRelated'
+export { default as ProductButton } from '@components/Product/ProductButton'
+export { default as ProductAmazonBtn } from '@components/Product/ProductAmazonBtn'
+export { default as ProductShenanigans } from '@components/Product/ProductShenanigans'
 // @modal
 export { default as Modal } from '@components/Modal/Modal'
 // @form

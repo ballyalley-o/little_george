@@ -17,3 +17,4 @@ export const StyledProductPriceP = classNames(
 )
 export const StyledContainerDiv = (borderColor: any) =>
   classNames(`price-info_card border-lp-[${borderColor}]`)
+
