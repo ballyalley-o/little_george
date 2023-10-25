@@ -1,2 +1,6 @@
 export { default as ProductDetails } from '@components/Product/ProductDetails'
 export { default as PriceInfoCard } from '@components/Product/PriceInfoCard'
+export { default as ProductRelated } from '@components/Product/ProductRelated'
+export { default as ProductButton } from '@components/Product/ProductButton'
+export { default as ProductIcon } from '@components/Product/ProductIcon'
+export { default as ProductShenanigans } from '@components/Product/ProductShenanigans'
